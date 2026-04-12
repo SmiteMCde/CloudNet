@@ -29,11 +29,9 @@ import eu.cloudnetservice.launcher.java22.updater.updaters.LauncherPatcherUpdate
 import eu.cloudnetservice.launcher.java22.updater.updaters.LauncherUpdater;
 import eu.cloudnetservice.launcher.java22.util.BootstrapUtil;
 import eu.cloudnetservice.launcher.java22.util.CommandLineHelper;
-import eu.cloudnetservice.launcher.java22.util.Environment;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 import lombok.NonNull;
 
 @SuppressWarnings("unused") // called by reflection
@@ -108,26 +106,6 @@ public final class CloudNetLauncher {
         throw new IllegalArgumentException("CloudNet is not at the required path for running in dev-mode");
       }
     } else {
-      // not running in development - warn when running as root or admin
-      if (Environment.runningAsRootOrAdmin()) {
-        // CHECKSTYLE.OFF: Launcher has no proper logger
-        System.err.println("╔═══════════════════════════════════════════════════════════════════╗");
-        System.err.println("║                              WARNING                              ║");
-        System.err.println("║                                                                   ║");
-        System.err.println("║    It looks like CloudNet is running as an administrative user!   ║");
-        System.err.println("║      This is not recommended as it allows attackers to f. ex.     ║");
-        System.err.println("║              easily delete files on your system!                  ║");
-        System.err.println("║                                                                   ║");
-        System.err.println("║ More info: https://madelinemiller.dev/blog/root-minecraft-server/ ║");
-        System.err.println("║                                                                   ║");
-        System.err.println("║                 CloudNet will start in 5 seconds!                 ║");
-        System.err.println("║                                                                   ║");
-        System.err.println("╚═══════════════════════════════════════════════════════════════════╝");
-        // wait 5 seconds
-        TimeUnit.SECONDS.sleep(5);
-        // CHECKSTYLE.ON
-      }
-
       // this path must not exist yet, the updaters are required to create it
       cloudNetJarPath = Path.of("launcher", "cloudnet.jar");
       var autoUpdaterEnabled = CommandLineHelper.findProperty(
