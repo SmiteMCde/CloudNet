@@ -31,6 +31,11 @@ repositories {
   maven("https://repo.opencollab.dev/maven-snapshots/")
   maven("https://repo.papermc.io/repository/maven-public/")
   maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+  maven(url = "https://central.sonatype.com/repository/maven-snapshots/") {
+    content {
+      includeModule("net.minestom", "minestom")
+    }
+  }
 }
 
 dependencies {
