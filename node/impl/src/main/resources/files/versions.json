@@ -89,6 +89,22 @@
       "website": "https://papermc.io",
       "versions": [
         {
+          "name": "26.1.2",
+          "cacheFiles": false,
+          "properties": {
+            "copy": {
+              "cache/.*": "/",
+              "versions/.*": "/",
+              "paper\\.jar": "paper.jar"
+            },
+            "jvmOptions": [
+              "-Dpaperclip.patchonly=true"
+            ],
+            "fetchOverPaperApi": true,
+            "versionGroup": "26.1.2"
+          }
+        },
+        {
           "name": "1.21.11",
           "cacheFiles": false,
           "properties": {
