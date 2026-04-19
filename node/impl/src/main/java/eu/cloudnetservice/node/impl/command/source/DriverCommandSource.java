@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Objects;
 import lombok.NonNull;
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -35,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class DriverCommandSource implements CommandSource {
 
-  private final Collection<String> messages = new ArrayList<>();
+  private final Collection<Component> messages = new ArrayList<>();
 
   /**
    * {@inheritDoc}
@@ -49,7 +50,7 @@ public class DriverCommandSource implements CommandSource {
    * {@inheritDoc}
    */
   @Override
-  public void sendMessage(@NonNull String message) {
+  public void sendMessage(@NonNull Component message) {
     this.messages.add(message);
   }
 
@@ -57,7 +58,15 @@ public class DriverCommandSource implements CommandSource {
    * {@inheritDoc}
    */
   @Override
-  public void sendMessage(@NonNull String... messages) {
+  public void sendMessage(@NonNull String message) {
+    this.messages.add(Component.text(message));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void sendMessage(@NonNull Component... messages) {
     this.messages.addAll(Arrays.asList(messages));
   }
 
@@ -65,8 +74,20 @@ public class DriverCommandSource implements CommandSource {
    * {@inheritDoc}
    */
   @Override
+  public void sendMessage(@NonNull String... messages) {
+    for (var message : messages) {
+      this.messages.add(Component.text(message));
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void sendMessage(@NonNull Collection<String> messages) {
-    this.messages.addAll(messages);
+    for (var message : messages) {
+      this.messages.add(Component.text(message));
+    }
   }
 
   /**
@@ -82,7 +103,7 @@ public class DriverCommandSource implements CommandSource {
   /**
    * @return all captured messages for the driver
    */
-  public @NonNull Collection<String> messages() {
+  public @NonNull Collection<Component> messages() {
     return this.messages;
   }
 

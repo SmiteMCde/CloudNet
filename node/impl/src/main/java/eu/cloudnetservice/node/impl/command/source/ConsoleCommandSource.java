@@ -21,6 +21,8 @@ import eu.cloudnetservice.node.command.source.CommandSource;
 import jakarta.inject.Singleton;
 import java.util.Collection;
 import lombok.NonNull;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,8 +47,26 @@ public class ConsoleCommandSource implements CommandSource {
    * {@inheritDoc}
    */
   @Override
+  public void sendMessage(@NonNull Component message) {
+    LOGGER.info(PlainTextComponentSerializer.plainText().serialize(message));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public void sendMessage(@NonNull String message) {
     LOGGER.info(message);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void sendMessage(@NonNull Component... messages) {
+    for (var message : messages) {
+      LOGGER.info(PlainTextComponentSerializer.plainText().serialize(message));
+    }
   }
 
   /**

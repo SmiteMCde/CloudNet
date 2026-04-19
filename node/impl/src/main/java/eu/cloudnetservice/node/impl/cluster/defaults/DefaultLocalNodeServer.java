@@ -48,6 +48,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import lombok.NonNull;
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
@@ -213,7 +214,7 @@ public class DefaultLocalNodeServer implements LocalNodeServer {
   }
 
   @Override
-  public @NonNull Collection<String> sendCommandLine(@NonNull String commandLine) {
+  public @NonNull Collection<Component> sendCommandLine(@NonNull String commandLine) {
     var sender = new DriverCommandSource();
     TaskUtil.getOrDefault(this.commandProvider.execute(sender, commandLine), null);
     return sender.messages();

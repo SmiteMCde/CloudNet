@@ -38,6 +38,7 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.Nullable;
 
 @Singleton
@@ -157,7 +158,7 @@ public class NodeClusterNodeProvider implements ClusterNodeProvider {
   }
 
   @Override
-  public @NonNull CompletableFuture<Collection<String>> sendCommandLineAsync(@NonNull String commandLine) {
+  public @NonNull CompletableFuture<Collection<Component>> sendCommandLineAsync(@NonNull String commandLine) {
     return TaskUtil.supplyAsync(() -> this.sendCommandLine(commandLine));
   }
 
@@ -192,7 +193,7 @@ public class NodeClusterNodeProvider implements ClusterNodeProvider {
   }
 
   @Override
-  public @NonNull Collection<String> sendCommandLine(@NonNull String commandLine) {
+  public @NonNull Collection<Component> sendCommandLine(@NonNull String commandLine) {
     var driverCommandSource = new DriverCommandSource();
     TaskUtil.getOrDefault(this.commandProvider.execute(driverCommandSource, commandLine), null);
     return driverCommandSource.messages();

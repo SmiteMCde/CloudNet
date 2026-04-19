@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
@@ -74,7 +75,7 @@ public interface NodeServer extends Named, Closeable {
 
   @Nullable SpecificCloudServiceProvider serviceProvider(@NonNull UUID uniqueId);
 
-  @NonNull Collection<String> sendCommandLine(@NonNull String commandLine);
+  @NonNull Collection<Component> sendCommandLine(@NonNull String commandLine);
 
   @Override
   void close();

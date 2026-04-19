@@ -35,12 +35,14 @@ import io.leangen.geantyref.TypeFactory;
 import jakarta.inject.Inject;
 import java.lang.reflect.Type;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.NonNull;
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnknownNullability;
 
@@ -229,7 +231,7 @@ public class RemoteNodeServer implements NodeServer {
   }
 
   @Override
-  public @NonNull Collection<String> sendCommandLine(@NonNull String commandLine) {
+  public @NonNull Collection<Component> sendCommandLine(@NonNull String commandLine) {
     return ChannelMessage.builder()
       .message("send_command_line")
       .targetNode(this.info.uniqueId())
@@ -242,6 +244,13 @@ public class RemoteNodeServer implements NodeServer {
         }
       })
       .exceptionally(_ -> Set.of())
+      .thenApply(results -> {
+        final Collection<Component> components = new ArrayList<>();
+        for (var result : results) {
+          components.add(Component.text(result));
+        }
+        return components;
+      })
       .join();
   }
 

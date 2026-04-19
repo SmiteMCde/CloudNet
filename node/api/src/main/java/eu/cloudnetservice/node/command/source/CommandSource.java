@@ -20,6 +20,7 @@ import eu.cloudnetservice.driver.base.Named;
 import eu.cloudnetservice.driver.registry.ServiceRegistry;
 import java.util.Collection;
 import lombok.NonNull;
+import net.kyori.adventure.text.Component;
 
 /**
  * The command source represents a message receiving object. All messages regarding command execution and command
@@ -40,7 +41,19 @@ public interface CommandSource extends Named {
    * @param message the message that is sent to the source
    * @throws NullPointerException if message is null.
    */
+  void sendMessage(@NonNull Component message);
+
+  /**
+   * @param message the message that is sent to the source
+   * @throws NullPointerException if message is null.
+   */
   void sendMessage(@NonNull String message);
+
+  /**
+   * @param messages the messages that are sent to the source
+   * @throws NullPointerException if messages is null.
+   */
+  void sendMessage(@NonNull Component... messages);
 
   /**
    * @param messages the messages that are sent to the source

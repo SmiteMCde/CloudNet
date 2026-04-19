@@ -91,6 +91,8 @@ dependencies {
   implementation(libs.bundles.aerogel)
   implementation(libs.stringSimilarity)
   implementation(libs.bundles.nightConfig)
+  implementation(libs.adventureApi)
+  implementation(libs.adventureSerializerPlain)
 
   implementation(libs.logbackCore)
   implementation(libs.logbackClassic)

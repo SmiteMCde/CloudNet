@@ -22,6 +22,7 @@ import eu.cloudnetservice.driver.command.CommandInfo;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 import lombok.NonNull;
+import net.kyori.adventure.text.Component;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.UnmodifiableView;
 
@@ -83,7 +84,7 @@ public interface ClusterNodeProvider {
    * @throws NullPointerException if the given command line is null.
    */
   @NonNull
-  Collection<String> sendCommandLine(@NonNull String commandLine);
+  Collection<Component> sendCommandLine(@NonNull String commandLine);
 
   /**
    * Gets all nodes which are currently registered on the current node. As per the CloudNet cluster contract, each node
@@ -203,7 +204,7 @@ public interface ClusterNodeProvider {
    * @throws NullPointerException if the given command line is null.
    */
   @NonNull
-  CompletableFuture<Collection<String>> sendCommandLineAsync(@NonNull String commandLine);
+  CompletableFuture<Collection<Component>> sendCommandLineAsync(@NonNull String commandLine);
 
   /**
    * Gets all nodes which are currently registered on the current node. As per the CloudNet cluster contract, each node
